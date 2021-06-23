@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { Card, CardBody, CardTitle, CardText, CardImg, List} from 'reactstrap';
 
 
-    function RenderDish({dish}) {
+    function RenderDish({dish, comments}) {
         return (
             <div className="container">
                 <div className='row'>
@@ -16,7 +16,7 @@ import { Card, CardBody, CardTitle, CardText, CardImg, List} from 'reactstrap';
                         </Card>
                     </div>
                     <div className='col-12 col-md-5 m-1'>
-                        <RenderComments comments={dish.comments}/>
+                        <RenderComments comments={comments}/>
                     </div>
                 </div>
             </div>
@@ -46,10 +46,9 @@ import { Card, CardBody, CardTitle, CardText, CardImg, List} from 'reactstrap';
         )
     }
 
-    const DishDetail = (props) => {
-        const { dish } = props;
+    const DishDetail = ({dish, comments}) => {
         if (!dish) return <div></div>
-        return <RenderDish dish={dish}/>
+        return <RenderDish dish={dish} comments={comments}/>
     }
 
 export default DishDetail;
