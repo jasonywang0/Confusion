@@ -3,6 +3,7 @@ import { Col, Row, Card, CardBody, CardTitle, CardText, CardImg, List, Button, M
 import { Control, LocalForm, Errors} from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -15,7 +16,7 @@ function RenderDish({dish, comments, addComment, dishId}) {
     return (
             <div className='col-12 col-md-5 m-1'>
                 <Card>
-                    <CardImg src={dish.image} alt={dish.name} />
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.description}</CardText>
