@@ -4,7 +4,6 @@ import { Control, LocalForm, Errors} from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-import { postComment } from '../redux/ActionCreators';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const required = (val) => val && val.length;
@@ -13,7 +12,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
 const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-function RenderDish({dish, comments, addComment, dishId}) {
+function RenderDish({dish}) {
 
     return (
             <div className='col-12 col-md-5 m-1'>
@@ -51,7 +50,7 @@ function RenderComments({comments, postComment, dishId}) {
                                 </Fade>
                             );
                         })}
-                        </Stagger>
+                </Stagger>
                 <CommentForm dishId={dishId} postComment={postComment}/>           
             </List>
         </div>
@@ -165,7 +164,7 @@ class CommentForm extends Component {
 
 
 
-const DishDetail = ({dish, comments, addComment, isLoading, errMess}) => {
+const DishDetail = ({dish, comments, postComment, isLoading, errMess}) => {
     if (isLoading) {
         return (
             <div className='container'>
