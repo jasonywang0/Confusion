@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Col, Row, Card, CardBody, CardTitle, CardText, CardImg, List, Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import { Control, LocalForm, Errors} from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -10,6 +11,7 @@ const isNumber = (val) => !isNaN(Number(val));
 const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 function RenderDish({dish, comments, addComment, dishId}) {
+
     return (
             <div className='col-12 col-md-5 m-1'>
                 <Card>
@@ -154,8 +156,24 @@ class CommentForm extends Component {
 
 
 
-    const DishDetail = ({dish, comments, addComment}) => {
-        if (!dish) return <div></div>
+const DishDetail = ({dish, comments, addComment, isLoading, errMess}) => {
+    if (isLoading) {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <Loading />
+                </div>
+            </div>
+        )
+    } else if (errMess) {
+        return (
+            <div className='container'>
+                <div className='row'>
+                    <h4>{errMess}</h4>
+                </div>
+            </div>
+        )
+    } else if (dish !== null) {
         return (
             <div class="container">
                 <div className="row">
@@ -174,6 +192,9 @@ class CommentForm extends Component {
                 </div>
             </div>
         )
-    }
+    } else {
+        return (<div></div>)
+    }   
+}
 
 export default DishDetail;
